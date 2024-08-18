@@ -1,0 +1,38 @@
+---
+- name: Configurer OneDrive et personnaliser l'environnement shell
+  hosts: all  
+  become: yes  
+  tasks:
+    - name: Créer un dossier OneDrive dans /home/ryan
+      file:
+        path: /home/ryan/OneDrive
+        state: directory
+        owner: ryan
+        group: ryan
+        mode: '0755'
+
+    - name: Créer ou modifier .bashrc pour ajouter un alias rclone
+      lineinfile:
+        path: /home/ryan/.bashrc
+        line: 'alias onedrive="rclone --vfs-cache-mode writes mount OneDrive: ~/OneDrive &"'
+        insertafter: EOF
+        owner: ryan
+        group: ryan
+        mode: '0644'
+
+    - name: Ajouter neofetch à la fin de .bashrc
+      lineinfile:
+        path: /home/ryan/.bashrc
+        line: 'neofetch'
+        insertafter: EOF
+        owner: ryan
+        group: ryan
+        mode: '0644'
+    
+    - name: Créer un dossier de cache pour tldr
+      file:
+        path: /home/ryan/.cache/tldr
+        state: directory
+        owner: ryan
+        group: ryan
+        mode: '0755'

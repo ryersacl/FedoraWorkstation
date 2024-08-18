@@ -1,0 +1,66 @@
+---
+- name: Install packages on Fedora
+  hosts: Fedora
+  become: yes
+  tasks:
+    - name: Install base packages
+      dnf:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - gnome-tweaks
+        - git
+        - git-all
+        - gnome-software
+        - neofetch
+        - plocate
+        - putty
+        - rclone
+        - speedtest-cli
+        - spice-vdagent
+        - telnet
+        - tldr
+        - virt-viewer
+        - vlc
+        - winetricks
+        - wireshark
+
+- name: Installer Docker sur Fedora
+  hosts: Fedora
+  become: yes  
+
+  tasks:
+    - name: Mettre à jour la liste des paquets DNF
+      dnf:
+        name: "*"
+        state: latest
+        update_cache: yes
+
+    - name: Installer les dépendances nécessaires
+      dnf:
+        name:
+          - dnf-plugins-core
+        state: present
+
+    - name: Ajouter le dépôt Docker officiel
+      command: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
+    - name: Installer Docker
+      dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+
+    - name: Démarrer et activer Docker
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Ajouter l'utilisateur actuel au groupe docker 
+      user:
+        name: ryan  
+        groups: docker
+        append: yes

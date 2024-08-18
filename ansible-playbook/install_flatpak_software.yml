@@ -1,0 +1,69 @@
+---
+- name: Installer les logiciels Flatpak
+  hosts: Fedora
+  become: yes
+  tasks:
+    - name: Installer Portal for Teams
+      command: flatpak install -y com.github.IsmaelMartinez.teams_for_linux
+
+    - name: Installer PyCharm-Community
+      command: flatpak install -y com.jetbrains.PyCharm-Community
+
+    - name: Installer draw.io
+      command: flatpak install -y com.jgraph.drawio.desktop
+
+    - name: Installer Azure Storage Explorer
+      command: flatpak install -y com.microsoft.AzureStorageExplorer
+
+    - name: Installer Microsoft Edge
+      command: flatpak install -y com.microsoft.Edge
+
+    - name: Installer Spotify
+      command: flatpak install -y com.spotify.Client
+
+    - name: Installer Steam
+      command: flatpak install -y com.valvesoftware.Steam
+
+    - name: Installer Visual Studio Code
+      command: flatpak install -y com.visualstudio.code
+
+    - name: Installer Lime3DS
+      command: flatpak install -y io.github.lime3ds.Lime3DS
+
+    - name: Installer outlook-for-linux
+      command: flatpak install -y io.github.mahmoudbahaa.outlook_for_linux
+
+    - name: Installer xbox-cloud-gaming-electron
+      command: flatpak install -y io.github.mandruis7.xbox-cloud-gaming-electron
+
+    - name: Installer Tor Browser Launcher
+      command: flatpak install -y org.torproject.torbrowser-launcher
+    
+    - name: Installer anydesk
+      command: flatpak install -y com.anydesk.Anydesk
+
+    - name: Installer Obsidian via Flatpak
+      command: flatpak install flathub md.obsidian.Obsidian -y
+    
+    - name: Installer Lutris via Flatpak
+      command: flatpak install flathub net.lutris.Lutris -y
+    
+    - name: Installer Deluge
+      command: flatpak install -y flathub org.deluge_torrent.deluge
+      ignore_errors: yes
+
+    - name: Installer Parsec
+      command: flatpak install -y flathub com.parsecgaming.parsec
+      ignore_errors: yes
+
+    - name: Installer Parsec
+      command: flatpak install -y flathub com.discordapp.Discord
+      ignore_errors: yes
+
+    - name: Installer FileZilla
+      command: flatpak install -y flathub org.filezillaproject.Filezilla
+      ignore_errors: yes
+
+
+
+
