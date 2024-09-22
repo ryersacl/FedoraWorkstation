@@ -64,6 +64,28 @@
       command: flatpak install -y flathub org.filezillaproject.Filezilla
       ignore_errors: yes
 
+    - name: Installer TigerVNC
+      command: flatpak install -y fedora org.tigervnc.vncviewer
+      ignore_errors: yes
 
+    - name: Installer RyuJinx
+      command: flatpak install -y flathub org.ryujinx.Ryujinx
+      ignore_errors: yes
+      
+    - name: Installer Okular
+      command: flatpak install -y flathub org.kde.okular
+      ignore_errors: yes
+      
+    - name: Installer MoonLight
+      command: flatpak install -y flathub com.moonlight_stream.Moonlight
+      ignore_errors: yes
+
+    - name: Installer Sunshine
+      command: flatpak install -y flathub dev.lizardbyte.app.Sunshine 
+      ignore_errors: yes
+
+    - name: Installer PokeMMO
+      command: flatpak install -y flathub com.pokemmo.PokeMMO
+      ignore_errors: yes
 
 

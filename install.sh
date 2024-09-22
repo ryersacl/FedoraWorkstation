@@ -16,11 +16,13 @@ sudo dnf update -y && sudo dnf upgrade -y
 sudo dnf install mesa-libOpenCL mesa-libd3d mesa-va-drivers mesa-vdpau-drivers -y
 sudo dnf install mesa-libOpenCL libclc clinfo -y
 sudo dnf install hip hip-devel hsakmt rocm-clinfo rocm-cmake rocm-comgr rocm-device-libs rocm-hip rocm-hip-devel rocm-opencl rocm-opencl-devel rocm-runtime rocm-smi rocminfo hipblas hipblas-devel rocblas rocsolver rocsparse -y
+sudo dnf install -y amd-gpu-firmware xorg-x11-drv-amdgpu
 sudo usermod -aG video $USER 
 
-#Install locate et dconf editor
+#Install locate et dconf editor & wine
 sudo dnf install -y plocate
 sudo updatedb
+sudo dnf install -y wine winetricks wine-mono
 sudo dnf install -y dconf-editor
 
 #Installer Gnome-tweaks et gestionnaire d'extensions
