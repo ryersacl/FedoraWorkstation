@@ -19,8 +19,8 @@ sudo dnf install hip hip-devel hsakmt rocm-clinfo rocm-cmake rocm-comgr rocm-dev
 sudo dnf install -y amd-gpu-firmware xorg-x11-drv-amdgpu
 sudo usermod -aG video $USER 
 
-#Install locate et dconf editor & wine
-sudo dnf install -y plocate
+#Install locate et dconf editor & wine & code
+sudo dnf install -y plocate code
 sudo updatedb
 sudo dnf install -y wine winetricks wine-mono
 sudo dnf install -y dconf-editor

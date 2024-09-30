@@ -24,9 +24,6 @@
     - name: Installer Steam
       command: flatpak install -y com.valvesoftware.Steam
 
-    - name: Installer Visual Studio Code
-      command: flatpak install -y com.visualstudio.code
-
     - name: Installer Lime3DS
       command: flatpak install -y io.github.lime3ds.Lime3DS
 
