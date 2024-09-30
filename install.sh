@@ -53,6 +53,13 @@ sudo cp wallpaper/wallpaper.jpg /usr/share/backgrounds/fedora-workstation/
 gsettings set org.gnome.desktop.background picture-uri-dark /usr/share/backgrounds/fedora-workstation/wallpaper.jpg
 gsettings set org.gnome.desktop.background picture-uri /usr/share/backgrounds/fedora-workstation/wallpaper.jpg
 
+#Augmenter la limite de mémoire verrouillé à 32go / Pour que les applications puissent utiliser plus que 8go de RAM
+MEMLOCK_LIMIT=32768
+# Ajoute les lignes à /etc/security/limits.conf
+echo "* soft memlock $MEMLOCK_LIMIT" >> /etc/security/limits.conf
+echo "* hard memlock $MEMLOCK_LIMIT" >> /etc/security/limits.conf
+echo "Limite de mémoire verrouillée mise à jour à $MEMLOCK_LIMIT kB (32 Go)."
+
 
 #Paramètres de confidentialité
 echo "Confidentialité de GNOME"
