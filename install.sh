@@ -61,7 +61,7 @@ echo "* hard memlock $MEMLOCK_LIMIT" >> /etc/security/limits.conf
 echo "Limite de mémoire verrouillée mise à jour à $MEMLOCK_LIMIT kB (32 Go)."
 
 
-#Paramètres de confidentialité
+#Paramètres de confidentialités
 echo "Confidentialité de GNOME"
 echo " - Désactivation de l'envoi des rapports"
 gsettings set org.gnome.desktop.privacy report-technical-problems false
