@@ -85,4 +85,8 @@
       command: flatpak install -y flathub com.pokemmo.PokeMMO
       ignore_errors: yes
 
+    - name: Installer Podman Desktop
+      command: flatpak install -y flathub io.podman_desktop.PodmanDesktop
+      ignore_errors: yes
+
 
