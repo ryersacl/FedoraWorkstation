@@ -31,6 +31,18 @@ flatpak install flathub org.gnome.Extensions -y
 flatpak install flathub com.mattjakeman.ExtensionManager -y
 sudo dnf install gnome-tweaks -y
 
+#Installer Terraform
+sudo dnf install -y dnf-plugins-core
+sudo tee /etc/yum.repos.d/hashicorp.repo > /dev/null <<EOF
+[hashicorp]
+name=HashiCorp Stable - \$basearch
+baseurl=https://rpm.releases.hashicorp.com/RHEL/9/\$basearch/stable
+enabled=1
+gpgcheck=1
+gpgkey=https://rpm.releases.hashicorp.com/gpg
+EOF
+
+sudo dnf -y install terraform
 
 #PARAMETRE SYSTEME >
 #Activer le mode d'énergie sur Performance
