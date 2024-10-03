@@ -169,6 +169,7 @@ sudo dnf install -y VirtualBox-7.0
 vboxmanage -v | cut -dr -f1
 wget https://download.virtualbox.org/virtualbox/7.0.18/Oracle_VM_VirtualBox_Extension_Pack-7.0.18.vbox-extpack
 sudo vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-7.0.18.vbox-extpack
+sudo VBoxManage setextradata global GUI/SuppressMessages confirmGoingFullscreen,remindAboutMouseIntegration,remindAboutAutoCapture
 sudo usermod -a -G vboxusers $USER
 sudo /sbin/vboxconfig
 sudo mkdir -p /var/lib/shim-signed/mok
