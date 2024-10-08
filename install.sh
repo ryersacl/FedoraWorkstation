@@ -1,5 +1,10 @@
 #!\bin\bash
 
+###Déclaration des couleurs
+RED='\033[0;31m'
+BLUE='\033[1;34m'
+NC='\033[0m' 
+
 ###Configuration de DNF
 echo "fastestmirror=true" | sudo tee -a /etc/dnf/dnf.conf
 echo "max_parallel_downloads=10" | sudo tee -a /etc/dnf/dnf.conf
@@ -12,37 +17,23 @@ sudo dnf install -y --nogpgcheck "https://download1.rpmfusion.org/nonfree/fedora
 #Mettre à jour le système
 sudo dnf update -y && sudo dnf upgrade -y
 
-#Installation des Drivers AMD Radeon pour la CG 7800XT
-sudo dnf install mesa-libOpenCL mesa-libd3d mesa-va-drivers mesa-vdpau-drivers -y
-sudo dnf install mesa-libOpenCL libclc clinfo -y
-sudo dnf install hip hip-devel hsakmt rocm-clinfo rocm-cmake rocm-comgr rocm-device-libs rocm-hip rocm-hip-devel rocm-opencl rocm-opencl-devel rocm-runtime rocm-smi rocminfo hipblas hipblas-devel rocblas rocsolver rocsparse -y
-sudo dnf install -y amd-gpu-firmware xorg-x11-drv-amdgpu
-sudo usermod -aG video $USER 
+#Installation des Drivers carte graphique
+echo -e "${BLUE}Souhaitez-vous installer les pilotes graphiques ?${NC}"
+echo "Appuyez sur 1 pour installer les pilotes graphiques."
+echo "Appuyez sur 2 pour poursuivre la configuration sans installer les pilotes."
+read -p "Entrez votre choix (1 ou 2) : " choix
 
-#Install locate et dconf editor & wine & code
-sudo dnf install -y plocate code
+if [ "$choix" -eq 1 ]; then
+    # Appel du script script1.sh pour installer les pilotes graphiques dans le dossier CG-Drivers
+    bash ./CG-Drivers/CG-Drivers.sh
+else
+    echo "Poursuite de la configuration sans pilotes graphiques..."
+fi
+#Fin du script CG-Drivers
+
+#Installation locate et dconf editor & wine & code
+sudo dnf install -y plocate code wine winetricks wine-mono dconf-editor gnome-extensions-app gnome-tweaks
 sudo updatedb
-sudo dnf install -y wine winetricks wine-mono
-sudo dnf install -y dconf-editor
-
-#Installer Gnome-tweaks et gestionnaire d'extensions
-sudo dnf install gnome-extensions-app -y
-flatpak install flathub org.gnome.Extensions -y
-flatpak install flathub com.mattjakeman.ExtensionManager -y
-sudo dnf install gnome-tweaks -y
-
-#Installer Terraform
-sudo dnf install -y dnf-plugins-core
-sudo tee /etc/yum.repos.d/hashicorp.repo > /dev/null <<EOF
-[hashicorp]
-name=HashiCorp Stable - \$basearch
-baseurl=https://rpm.releases.hashicorp.com/RHEL/9/\$basearch/stable
-enabled=1
-gpgcheck=1
-gpgkey=https://rpm.releases.hashicorp.com/gpg
-EOF
-
-sudo dnf -y install terraform
 
 #PARAMETRE SYSTEME >
 #Activer le mode d'énergie sur Performance
@@ -65,14 +56,6 @@ sudo cp wallpaper/wallpaper.jpg /usr/share/backgrounds/fedora-workstation/
 gsettings set org.gnome.desktop.background picture-uri-dark /usr/share/backgrounds/fedora-workstation/wallpaper.jpg
 gsettings set org.gnome.desktop.background picture-uri /usr/share/backgrounds/fedora-workstation/wallpaper.jpg
 
-#Augmenter la limite de mémoire verrouillé à 32go / Pour que les applications puissent utiliser plus que 8go de RAM
-MEMLOCK_LIMIT=32768
-# Ajoute les lignes à /etc/security/limits.conf
-echo "* soft memlock $MEMLOCK_LIMIT" >> /etc/security/limits.conf
-echo "* hard memlock $MEMLOCK_LIMIT" >> /etc/security/limits.conf
-echo "Limite de mémoire verrouillée mise à jour à $MEMLOCK_LIMIT kB (32 Go)."
-
-
 #Paramètres de confidentialités
 echo "Confidentialité de GNOME"
 echo " - Désactivation de l'envoi des rapports"
@@ -90,11 +73,24 @@ echo " - Modification de l ordre de tri"
 gsettings set org.gtk.Settings.FileChooser sort-directories-first true
 gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
 
+#Paramètres de Gnome
 echo "Configuration de GNOME Logiciels"
 echo " - Désactivation du téléchargement automatique des mises à jour"
 gsettings set org.gnome.software download-updates false
 echo " - Activation de l'affichage des logiciels propriétaires"
 gsettings set org.gnome.software show-only-free-apps false
+
+#Installer Terraform
+sudo dnf install -y dnf-plugins-core
+sudo tee /etc/yum.repos.d/hashicorp.repo > /dev/null <<EOF
+[hashicorp]
+name=HashiCorp Stable - \$basearch
+baseurl=https://rpm.releases.hashicorp.com/RHEL/9/\$basearch/stable
+enabled=1
+gpgcheck=1
+gpgkey=https://rpm.releases.hashicorp.com/gpg
+EOF
+sudo dnf -y install terraform
 
 #Installation d'Ansible et lancement des playbooks
 echo "Installation d'Ansible et lancement des playbooks"
@@ -133,9 +129,6 @@ echo " - Super + c : Ouvrir la calculatrice"
 gsettings set org.gnome.settings-daemon.plugins.media-keys calculator "['<Super>c']"
 
 ###Installation de Virtualbox
-#Coloriser le script
-RED='\033[0;31m'
-NC='\033[0m' # No Color
 #Message d'alerte
 echo "Installation de virtualbox"
 echo -e "${RED}ATTENTION${NC}"
@@ -147,6 +140,12 @@ echo " "
 echo " "
 echo -e "${RED}Veuillez appuyer sur une touche pour continuer${NC}"
 read -p ""
+#Augmenter la limite de mémoire verrouillé à 32go / Pour que les VM puissent utiliser plus que 8go de RAM
+MEMLOCK_LIMIT=32768
+# Ajoute les lignes à /etc/security/limits.conf
+echo "* soft memlock $MEMLOCK_LIMIT" >> /etc/security/limits.conf
+echo "* hard memlock $MEMLOCK_LIMIT" >> /etc/security/limits.conf
+echo "Limite de mémoire verrouillée mise à jour à $MEMLOCK_LIMIT kB (32 Go)."
 #Ajout du dépot
 sudo dnf install -y @development-tools
 sudo dnf install -y kernel-headers kernel-devel dkms

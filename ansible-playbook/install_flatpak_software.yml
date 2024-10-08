@@ -88,5 +88,11 @@
     - name: Installer Podman Desktop
       command: flatpak install -y flathub io.podman_desktop.PodmanDesktop
       ignore_errors: yes
+      
+    - name: Installer Gnome-tweaks
+      command: flatpak install -y flathub org.gnome.Extensions
+      ignore_errors: yes
 
-
+    - name: Installer gestionnaire d'extensions
+      command: flatpak install -y flathub com.mattjakeman.ExtensionManager
+      ignore_errors: yes

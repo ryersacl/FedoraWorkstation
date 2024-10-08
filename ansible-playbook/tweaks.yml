@@ -3,36 +3,36 @@
   hosts: all  
   become: yes  
   tasks:
-    - name: Créer un dossier OneDrive dans /home/ryan
+    - name: Créer un dossier OneDrive dans le répertoire Home de {{ ansible_env.USER }}
       file:
-        path: /home/ryan/OneDrive
+        path: "/home/{{ ansible_env.USER }}/OneDrive" 
         state: directory
-        owner: ryan
-        group: ryan
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
         mode: '0755'
 
-    - name: Créer ou modifier .bashrc pour ajouter un alias rclone
+    - name: Créer ou modifier .bashrc pour ajouter un alias rclone au shell de {{ ansible_env.USER }}
       lineinfile:
-        path: /home/ryan/.bashrc
+        path: "/home/{{ ansible_env.USER }}/.bashrc"
         line: 'alias onedrive="rclone --vfs-cache-mode writes mount OneDrive: ~/OneDrive &"'
         insertafter: EOF
-        owner: ryan
-        group: ryan
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
         mode: '0644'
 
-    - name: Ajouter neofetch à la fin de .bashrc
+    - name: Ajouter neofetch à la fin du .bashrc de {{ ansible_env.USER }}
       lineinfile:
-        path: /home/ryan/.bashrc
+        path: "/home/{{ ansible_env.USER }}/.bashrc"
         line: 'neofetch'
         insertafter: EOF
-        owner: ryan
-        group: ryan
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
         mode: '0644'
     
-    - name: Créer un dossier de cache pour tldr
+    - name: Créer un dossier de cache pour tldr pour l'utilisateur {{ ansible_env.USER }}
       file:
-        path: /home/ryan/.cache/tldr
+        path: "/home/{{ ansible_env.USER }}/.cache/tldr"
         state: directory
-        owner: ryan
-        group: ryan
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
         mode: '0755'
