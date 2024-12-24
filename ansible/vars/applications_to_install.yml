@@ -1,0 +1,28 @@
+---
+applications_to_install:
+  - plocate
+  - code
+  - wine
+  - winetricks
+  - wine
+  - mono
+  - dconf-editor
+  - gnome-extensions-app
+  - gnome-tweaks
+  - gnome-tweaks
+  - git
+  - git-all
+  - gnome-software
+  - plocate
+  - putty
+  - rclone
+  - speedtest-cli
+  - spice-vdagent
+  - telnet
+  - tldr
+  - virt-viewer
+  - vlc
+  - winetricks
+  - wireshark
+  - dnf-plugins-core
+  - fastfetch

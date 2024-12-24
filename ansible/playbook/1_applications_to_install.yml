@@ -1,0 +1,10 @@
+---
+- name: Chargement des variables
+  ansible.builtin.include_vars:
+    file: ../vars/applications_to_install.yml
+
+- name: Installation du paquet "{{ item }}"
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ applications_to_install }}"

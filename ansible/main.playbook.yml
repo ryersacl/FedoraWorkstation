@@ -1,0 +1,16 @@
+---
+- name: Installation du poste de travail
+  hosts: localhost
+  become: true
+  vars:
+    ansible_user: "ryan"
+  tasks:
+
+    - name: Installer applications
+      ansible.builtin.import_tasks: ./playbook/1_applications_to_install.yml
+
+    - name: Installer flatpak
+      ansible.builtin.import_tasks: ./playbook/2_flatpak_to_install.yml
+
+    - name: Tweaks
+      ansible.builtin.import_tasks: ./playbook/3_tweaks.yml
