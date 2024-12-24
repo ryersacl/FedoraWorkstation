@@ -19,3 +19,5 @@ flathub_apps:
   - "com.valvesoftware.Steam"
   - "com.spotify.Client"
   - "com.usebottles.bottles"
+  - "io.github.lime3ds.Lime3DS"
+  - "com.github.IsmaelMartinez.teams_for_linux"
