@@ -1,7 +1,7 @@
 ---
 applications_to_install:
   - plocate
-  - code
+ # - code
   - wine
   - winetricks
   - wine
