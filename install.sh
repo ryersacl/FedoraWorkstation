@@ -48,9 +48,6 @@ bash ./bash/extensions.sh
 ###Installation de terraform
 bash ./bash/terraform.sh
 
-###Installation de Docker
-bash ./bash/docker.sh
-
 ###Installation de virtualbox
 bash ./bash/virtualbox.sh
 
