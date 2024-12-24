@@ -15,3 +15,6 @@ flathub_apps:
   - "com.mattjakeman.ExtensionManager"
   - "com.vivaldi.Vivaldi"
   - "com.heroicgameslauncher.hgl"
+  - "io.github.mandruis7.xbox-cloud-gaming-electron"
+  - "com.valvesoftware.Steam"
+  - "com.spotify.Client"
