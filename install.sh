@@ -33,6 +33,9 @@ else
 fi
 #Fin du script CG-Drivers
 
+#Installation de VSCode
+bash ./bash/code.sh
+
 #Installation d'Ansible et lancement des playbooks
 echo "Installation d'Ansible et lancement des playbooks"
 sudo dnf install ansible ansible-core -y
