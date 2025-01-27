@@ -35,6 +35,9 @@ fi
 
 #Installation de VSCode
 bash ./bash/code.sh
+#Installation de Lens IDE Kubernetes
+sudo yum-config-manager --add-repo https://downloads.k8slens.dev/rpm/lens.repo
+sudo yum install lens
 
 #Installation d'Ansible et lancement des playbooks
 echo "Installation d'Ansible et lancement des playbooks"
